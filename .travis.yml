@@ -8,3 +8,17 @@ before_install:
 
 script:
   - docker run -e CI=true phantomastray/react-docker-app npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
+  region: "us-east-1"
+  app: "react-docker-testapp"
+  env: "ReactDockerTestapp-env"
+  bucket_name: "elasticbeanstalk-us-east-1-179482692899"
+  bucket_path: "react-docker-testapp"
+  only_create_app_version: "false"
+  on:
+    branch: master
