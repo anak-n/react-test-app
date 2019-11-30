@@ -1,0 +1,10 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t phantomastray/react-docker-app -f Dockerfile.dev .
+
+script:
+  - docker run phantomastray/react-docker-app npm run test -- --coverage
